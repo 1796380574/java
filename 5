@@ -1,0 +1,260 @@
+package LINEAREQUATION;
+
+public class LinearEquation {
+    private double a,b,c,d,e,f;
+    double eps=0.000001;
+    LinearEquation(double a,double b,double c,double d,double e,double f){
+        this.a=a;
+        this.b=b;
+        this.c=c;
+        this.d=d;
+        this.e=e;
+        this.f=f;
+    }
+
+
+    public double getA() {
+        return a;
+    }
+
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public double getC() {
+        return c;
+    }
+
+    public void setC(double c) {
+        this.c = c;
+    }
+
+    public double getD() {
+        return d;
+    }
+
+    public void setD(double d) {
+        this.d = d;
+    }
+
+    public double getE() {
+        return e;
+    }
+
+    public void setE(double e) {
+        this.e = e;
+    }
+
+    public double getF() {
+        return f;
+    }
+
+    public void setF(double f) {
+        this.f = f;
+    }
+
+    public boolean isSolvable(){
+        return Math.abs(a * d - b * c) > eps;
+    }
+
+    public double getX(){return (e*d-b*f)/(a*d-b*c);}
+    public double getY(){return (a*f-e*c)/(a*d-b*c);}
+}
+
+package LINEAREQUATION;
+
+import java.util.Scanner;
+public class LinearEquationDemo {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        double a,b,c,d,e,f;
+        a=kb.nextDouble();
+        b=kb.nextDouble();
+        c=kb.nextDouble();
+        d=kb.nextDouble();
+        e=kb.nextDouble();
+        f=kb.nextDouble();
+        LinearEquation tmp = new LinearEquation(a,b,c,d,e,f);
+        if(!tmp.isSolvable()){
+            System.out.println("The equation has no solution");
+        }else{
+            System.out.println(tmp.getX());
+            System.out.println(tmp.getY());
+        }
+
+    }
+}
+
+package QUADRATICEQUATION;
+
+public class QuadraticEquation {
+    private double a,b,c;
+    QuadraticEquation(double a,double b,double c){
+        this.a=a;
+        this.b=b;
+        this.c=c;
+    }
+
+    public double getA() {
+        return a;
+    }
+
+    public double getB() {
+        return b;
+    }
+
+    public void setC(int c) {
+        this.c = c;
+    }
+
+    public double getDiscriminant(){
+        return b*b-4*a*c;
+    }
+
+    public double getRoot1(){
+        return (-b+Math.sqrt(b*b-4*a*c))/2.0*a;
+    }
+
+    public double getRoot2(){
+        return (-b-Math.sqrt(b*b-4*a*c))/2.0*a;
+    }
+}
+
+package QUADRATICEQUATION;
+
+import java.util.Scanner;
+public class QuadraticEquationDemo {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        double a,b,c;
+        double eps = 0.000001;
+        a=kb.nextDouble();
+        b=kb.nextDouble();
+        c=kb.nextDouble();
+        QuadraticEquation tmp =new QuadraticEquation(a,b,c);
+        if(tmp.getDiscriminant()>eps){
+            System.out.println(tmp.getRoot1());
+            System.out.println(tmp.getRoot2());
+        }else if(Math.abs(tmp.getDiscriminant())<eps){
+            System.out.println(tmp.getRoot1());
+        }else{
+            System.out.println("The equation has no roots.");
+        }
+    }
+}
+
+package STOPWATCH;
+
+import java.util.Date;
+public class StopWatch {
+    private long startTime;
+    private long endTime;
+//    private Date date1;
+//    private Date date2;
+
+    public long getStartTime(){
+        return startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    StopWatch(){
+        this.startTime=0;
+        this.endTime=0;
+    }
+
+    private long currentTime(){
+        Date date = new Date();
+        return date.getTime();
+    }
+
+    public void start(){ startTime=currentTime(); }
+
+    public void stop(){
+        endTime=currentTime();
+    }
+
+    public long getElapsedTime(){
+        return endTime-startTime;
+    }
+}
+
+package STOPWATCH;
+
+import java.util.Random;
+public class StopWatchDemo {
+    public static void main(String[] args) {
+        int MAX = 10000;
+        StopWatch tmp = new StopWatch();
+
+        //初始化数组
+        Random rand = new Random(MAX);
+        int[] array = new int[MAX];
+        for(int i=0;i<MAX;i++)
+            array[i]=rand.nextInt(MAX);
+
+        //计算选择排序所需要的时间
+        tmp.start();
+        for(int i=0;i<MAX;i++){
+            int pos =i;
+            for(int j=i;j<MAX;j++){
+                if(array[j]>array[pos])
+                    pos=j;
+            }
+            int x=array[pos];
+            array[pos]=array[i];
+            array[i]=x;
+        }
+        tmp.stop();
+
+        System.out.println(tmp.getElapsedTime());
+
+    }
+}
+
+import java.util.Date;
+public class DateDemo {
+    public static void main(String[] args) {
+        Date date = new Date();
+        int t=10000;
+        for(int i=4;i<=11;i++) {
+            date.setTime(date.getTime() + t);
+            System.out.println(date.toString());
+            t *= 10;
+        }
+    }
+}
+
+import java.util.GregorianCalendar;
+public class GregorianCalendarDemo {
+    public static void main(String[] args) {
+        GregorianCalendar tmp =new GregorianCalendar();
+        System.out.printf("%d %d %d\n",tmp.get(GregorianCalendar.YEAR),
+                tmp.get(GregorianCalendar.MONTH),tmp.get(GregorianCalendar.DAY_OF_MONTH));
+
+        tmp.setTimeInMillis(1234567898765L);
+        System.out.printf("%d %d %d\n",tmp.get(GregorianCalendar.YEAR),
+                tmp.get(GregorianCalendar.MONTH),tmp.get(GregorianCalendar.DAY_OF_MONTH));
+    }
+}
+
+import java.util.Random;
+public class RandomDemo {
+    public static void main(String[] args) {
+        Random rand = new Random(1000);
+        for(int i=0;i<50;i++){
+            System.out.println(rand.nextInt(100));
+        }
+    }
+}
+
