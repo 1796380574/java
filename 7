@@ -1,0 +1,140 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+public class book11_9 {
+    public static void main(String[] args) {
+        ArrayList<Integer> row = new ArrayList<Integer>();
+        ArrayList<Integer> col = new ArrayList<Integer>();
+
+        Scanner kb = new Scanner(System.in);
+        System.out.print("Enter the array size n :");
+        int n = kb.nextInt();
+        int[][] mat = new int[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                mat[i][j]=(int)(Math.random()*2);
+            }
+        }
+        int maxRow=-1,maxCol=-1;
+        for(int i=0;i<n;i++){
+            int cntRow=0;
+            for(int j=0;j<n;j++){
+                if(mat[i][j]==1)cntRow++;
+                System.out.printf("%d",mat[i][j]);
+            }
+            if(cntRow>maxRow){
+                maxRow=cntRow;
+                row.clear();
+                row.add(i);
+            }else if(cntRow==maxRow)row.add(i);
+            System.out.println();
+        }
+        for(int j=0;j<n;j++){
+            int cntCol=0;
+            for(int i=0;i<n;i++){
+                if(mat[i][j]==1)cntCol++;
+            }
+            if(cntCol>maxCol){
+                maxCol=cntCol;
+                col.clear();
+                col.add(j);
+            }else if(cntCol==maxCol)col.add(j);
+        }
+        System.out.print("The largest row index: ");
+        for(int i=0;i<row.size()-1;i++)
+            System.out.print(row.get(i)+", ");
+        System.out.println(row.get(row.size()-1));
+
+        System.out.print("The largest column index: ");
+        for(int i=0;i<col.size()-1;i++)
+            System.out.print(col.get(i)+", ");
+        System.out.println(col.get(col.size()-1));
+    }
+}
+
+import java.util.Scanner;
+import java.util.ArrayList;
+public class book11_13 {
+    public static void removeDuplicate(ArrayList<Integer> list){
+        int cnt=0;
+        int[] cmp =new int[10];
+        for (int i=0;i<list.size();i++) {
+            int x=list.get(i);
+            int f=0;
+            for(int j=0;j<cnt;j++){
+                if(x==cmp[j]){
+                    f=1;
+                    break;
+                }
+            }
+            if(f==0){
+                System.out.printf("%d ",x);
+                //System.out.print(x+" ");
+                cmp[cnt]=x;
+                cnt++;
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        ArrayList<Integer> a =new ArrayList<Integer>();
+        System.out.print("Enter 10 integers: ");
+        for(int i=0;i<10;i++)
+            a.add(kb.nextInt());
+        System.out.print("The distinct integers are ");
+        removeDuplicate(a);
+    }
+}
+
+import java.util.ArrayList;
+import java.util.Scanner;
+public class book11_15 {
+    static class Node {
+        double x,y;
+        Node(double x,double y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+    public static double getArea(Node a,Node b,Node c){
+        return 0.5*((a.x*b.y-b.x*a.y)+(b.x*c.y-c.x*b.y)+(c.x*a.y-a.x*c.y));
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Node> a = new ArrayList<Node>();
+        Scanner kb = new Scanner(System.in);
+        int n = kb.nextInt();
+        for(int i=0;i<n;i++){
+            double x=kb.nextDouble();
+            double y=kb.nextDouble();
+            a.add(new Node(x,y));
+        }
+        double res=0;
+        for(int i=1;i<n-1;i++){
+            res+=getArea(a.get(0),a.get(i+1),a.get(i));
+        }
+        System.out.print(res);
+    }
+}
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class book11_18 {
+
+    public static ArrayList<Character>toCharacterArray(String s){
+        ArrayList<Character> res = new ArrayList<Character>();
+        for(int i=0;i<s.length();i++){
+            res.add(s.charAt(i));
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Character> res = new ArrayList<Character>();
+        Scanner kb = new Scanner(System.in);
+        String s = kb.next();
+        res=toCharacterArray(s);
+        System.out.println(res);
+    }
+}
