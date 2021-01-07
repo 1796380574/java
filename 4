@@ -1,0 +1,153 @@
+package Circle;
+public class Circle {
+    private double radius;
+    Circle(){
+        radius=1;
+    }
+
+    Circle(double radius){
+        this.radius=radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public double getArea(){
+        return Math.PI*radius*radius;
+    }
+
+    public double getPerimeter(){
+        return 2*Math.PI*radius;
+    }
+
+    public void printArea(){
+        System.out.printf("The area of the circle is %f\n",getArea());
+    }
+
+}
+
+package Circle;
+
+public class CircleDemo {
+    public static void main(String[] args) {
+        Circle circle =new Circle();
+        System.out.printf("the radius of the circle is %f\n",circle.getRadius());
+        circle.printArea();
+
+        circle.setRadius(10);
+        System.out.printf("the radius of the circle is %f\n",circle.getRadius());
+        circle.printArea();
+    }
+}
+
+package _TV;
+
+public class TV {
+    int channel=1;
+    int volumeLevel=1;
+    boolean on=false;
+    public TV() {
+    }
+    public void turnOn(){
+        on = true;
+    }
+    public void turnOff(){
+        on = false;
+    }
+    public void setChannel(int newChannel) {
+        if(on && newChannel>=1&&newChannel<=120)
+            channel=newChannel;
+    }
+    public void setVolume(int newVolumelevel) {
+        if(on &&newVolumelevel>=1&&newVolumelevel<=120)
+            volumeLevel=newVolumelevel;
+    }
+    public void channelDown() {
+        if(on&&channel>1)
+            channel--;
+    }
+    public void channelUp() {
+        if(on&&channel<120)
+            channel++;
+    }
+    public void volumeUp() {
+        if(on && volumeLevel<7)
+            volumeLevel++;
+    }
+    public void volumeDown() {
+        if(on && volumeLevel>1)
+            volumeLevel--;
+    }
+}
+
+package _TV;
+
+public class TextTV {
+
+    public static void main(String[] args) {
+        TV tv1=new TV();
+        tv1.turnOn();
+        tv1.setChannel(30);
+        tv1.setVolume(3);
+        TV tv2 =new TV();
+        tv2.turnOn();
+        tv2.channelUp();
+        tv2.channelUp();
+        tv2.volumeUp();
+        System.out.println("tv1's channel is "+tv1.channel+" and volume level is "+tv1.volumeLevel);
+        System.out.println("tv2's channel is "+tv2.channel+" and volume level is "+tv2.volumeLevel);
+
+    }
+
+}
+
+
+public class TestCircleWithStaticMembers {
+
+    public static void main(String[] args) {
+        System.out.println("Before creating objects");
+        System.out.println("The number of Circle objects is "+Circle.numberOfObjects);
+
+        Circle c1=new Circle();
+
+        System.out.println("\nAfter creating c1");
+        System.out.println("c1: radius ("+c1.radius+") and number of Circle objects ("+c1.numberOfObjects +")");
+
+        Circle c2 =new Circle(5);
+
+        c1.radius=9;
+
+        System.out.println("\nAfter creating c2 and modifying c1");
+        System.out.println("c1: radius ("+ c1.radius+") and number of Circle objects ("+c1.numberOfObjects+")");
+        System.out.println("c2: radius ("+ c2.radius+") and number of Circle objects ("+c2.numberOfObjects+")");
+    }
+
+}
+
+import java.util.Scanner;
+import javafx.geometry.Point2D;
+public class TestPoint2D {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        System.out.print("Enter point1's x- ,y-coordinates");
+        double x1 = kb.nextDouble();
+        double y1 = kb.nextDouble();
+        System.out.print("Enter point2's x- ,y-coordinates");
+        double x2 = kb.nextDouble();
+        double y2 = kb.nextDouble();
+        Point2D p1 = new Point2D(x1,y1);
+        Point2D p2 = new Point2D(x2,y2);
+        System.out.println("p1 is "+p1.toString());
+        System.out.println("p2 is "+p2.toString());
+        System.out.println("The distance between p1 and p2 is "+p1.distance(p2));
+        System.out.println("The midpoint between p1 and p2 is "+p1.midpoint(p2).toString());
+    }
+}
+
+
+
