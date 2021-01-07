@@ -1,0 +1,154 @@
+import java.util.Scanner;
+public class book12_6 {
+
+    public static void main(String[] args) throws Exception {
+        System.out.print("please input a hex number :");
+        Scanner kb = new Scanner(System.in);
+        String s=kb.next();
+        s=s.toUpperCase();
+        boolean isHex=true;
+        int flag=1;
+        for(int i=0;i<s.length();i++){
+            try{
+                isHex= s.charAt(i) >= '0' && s.charAt(i) <= '9' || s.charAt(i) >= 'A' && s.charAt(i) <= 'F';
+                if(!isHex){
+                    flag=0;
+                    throw new Exception("it is not a hex number!");
+                }
+            }
+            catch (Exception ex){
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
+        }
+        if(flag==1){
+            int res=0;
+            for(int i=0;i<s.length();i++){
+                int tmp;
+                if(s.charAt(i)>='0'&&s.charAt(i)<='9')tmp=s.charAt(i)-'0';
+                else tmp=s.charAt(i)-'A'+10;
+                res=res*16+tmp;
+            }
+            System.out.println("The result is : "+res);
+        }
+
+    }
+}
+
+import java.util.Scanner;
+public class book12_7 {
+    static int bin2Dec(String s) {
+        int res=0;
+        try{
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)!='0' && s.charAt(i)!='1'){
+                    throw new NumberFormatException("it is not a bin number!");
+                }
+                res=res*2+(s.charAt(i)-'0');
+            }
+        }
+        catch (NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
+        return res;
+    }
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        String s=kb.next();
+        int res=bin2Dec(s);
+        System.out.println(res);
+    }
+}
+
+import java.util.Map;
+import java.util.Scanner;
+
+class HexFormatException extends Exception{
+    public HexFormatException(String msg){
+        super(msg);
+    }
+}
+
+
+public class book12_8 {
+    static int hex2Dec(String s) throws HexFormatException {
+        int res=0;
+        s=s.toUpperCase();
+        try{
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)>='0'&&s.charAt(i)<='9'){
+                    res=res*16+(s.charAt(i)-'0');
+                }else if(s.charAt(i)>='A'&&s.charAt(i)<='F'){
+                    res=res*16+(s.charAt(i)-'A'+10);
+                }else{
+                    throw new HexFormatException("This is not a hex number");
+                }
+
+            }
+        }
+        catch (HexFormatException ex){
+            System.out.println(ex.getMessage());
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws HexFormatException {
+        Scanner kb = new Scanner(System.in);
+        String s = kb.next();
+
+        System.out.println(hex2Dec(s));
+
+    }
+}
+
+import java.util.Scanner;
+
+class BinaryFormatException extends Exception{
+    public BinaryFormatException(String s){
+        super(s);
+    }
+}
+
+public class book12_9 {
+
+    static int bin2Dec(String s)throws BinaryFormatException{
+        int res=0;
+        try{
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)!='0'&&s.charAt(i)!='1')throw new BinaryFormatException("This is not a bin number!");
+                res=res*2+(s.charAt(i)-'0');
+            }
+        }catch (BinaryFormatException ex){
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
+        return res;
+    }
+
+
+    public static void main(String[] args) throws BinaryFormatException{
+        Scanner kb = new Scanner(System.in);
+        String s=kb.next();
+        System.out.println(bin2Dec(s));
+    }
+}
+
+import java.util.Scanner;
+import java.util.Stack;
+public class book12_10 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        Stack<Integer>st = new Stack<Integer>();
+        try{
+            while(true){
+//                System.out.println(1);
+                st.push(1);
+            }
+        }
+        catch (OutOfMemoryError ex){
+            System.out.println("boom!");
+            System.exit(1);
+        }
+    }
+}
